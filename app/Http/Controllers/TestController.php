@@ -11,9 +11,7 @@ class TestController extends Controller
         $test = new Test;
         $test = $test->orderBy('id','DESC')->take(6)->get();
         $processedRecords = $test->map(function ($record) {
-            // Lấy giờ từ trường created_at của mỗi bản ghi
             $name = User::where('id', '=', $record->create_by)->first();
-            // Thêm giờ vào bản ghi
             $record['own'] = $name->name;
             return $record;
         });
@@ -61,10 +59,7 @@ class TestController extends Controller
     }
     public function getUserName()
     {
-        // Lấy thông tin người dùng có tên là "admin" từ cơ sở dữ liệu
-        $userName = User::where('name', 'nguoidung99')->first();
-
-        // Kiểm tra xem người dùng có tồn tại không
+        $userName = User::where('name', 'nguoidung')->first();
         if ($userName) {
             $userInfor = [
                 'email' => $userName->email,
@@ -73,8 +68,6 @@ class TestController extends Controller
 
             return response()->json($userInfor);
         }
-
-        // Trường hợp không tìm thấy người dùng
         return response()->json(['error' => 'user not found.'], 404);
     }
 }

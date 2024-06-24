@@ -11,10 +11,7 @@ class Quest extends Model
     protected $fillable = [
         'content',
         'answer', 
-        'answerA',
-        'answerB',
-        'answerC',
-        'answerD',
+        'correct_answer',
         'owner',
         'difficult'
     ];

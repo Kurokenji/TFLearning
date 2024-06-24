@@ -11,7 +11,6 @@ class Test extends Model
     protected $fillable = [
         'title',
         'quest',
-        'num_quest', 
         'create_by'
     ];
 }

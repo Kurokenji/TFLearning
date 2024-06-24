@@ -21,15 +21,7 @@ class QuestController extends Controller
             $quest = Quest::where('content', 'like', '%'.$searchValue.'%')->take(10)->get();
       
             return response()->json($quest);
-            // $quest = Quest::where('content', 'like', '%'.$searchValue.'%')->get();
-            // foreach ($quests as $quest) {
-            //     $quest->questScoreEachs;
-            // }
-
-            // return response()->json([
-            //     'success' => true,
-            //     'data' => $quest,
-            // ], 200);
+       
         } catch (Exception $error) {
             return response()->json([
                 'success' => false,
@@ -43,23 +35,8 @@ class QuestController extends Controller
     }
     public function createQuest(Request $request){
         try {
-            // $newQuest = new Quest;
-            // // content	answer	owner	difficult
-            // $newQuest->content = $request->input('1+1=?');
-            // $newQuest->answer = $request->input('2');
-            // $newQuest->owner = "1"
-            // $newQuest->difficult = $request->input('difficult');
-            // $newQuest->save();
-            // $newQuest = request(['content','answer', 'answerA','answerB','answerC','answerD','owner','difficult']);      
+                 
             $newQuest = new Quest;
-            // $newQuest->content = "noidung";   
-            // $newQuest->answer = "noidung"; 
-            // $newQuest->answerA = "noidung";   
-            // $newQuest->answerB = "noidung";
-            // $newQuest->answerC = "noidung";
-            // $newQuest->answerD = "noidung";
-            // $newQuest->owner = "1";
-            // $newQuest->difficult = "0";
 
             $answers = array(); // danh sách đáp án để chọn
             
@@ -88,12 +65,6 @@ class QuestController extends Controller
                 'data' => $newQuest,
             ], 200);
             
-            // Quest::create($newQuest);
-
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'create quest successfull',
-            // ], 200);
         } catch (Exception $error) {
             return response()->json([
                 'success' => false,
@@ -103,18 +74,11 @@ class QuestController extends Controller
     }
     public function getQuestById($id){
         $records = Quest::find($id);
-        // $records = Quest::where('id', $id)->get(); 
-
         
         $answersString = $records->answer_list; // "4,2,3,1" answer_list
         $answersArray = explode(',', $answersString);
         $numq = count($answersArray);
-        // $answerA = isset($answersArray[0]) ? $answersArray[0] : null;
-        // $answerB = isset($answersArray[1]) ? $answersArray[1] : null;
-        // $answerC = isset($answersArray[2]) ? $answersArray[2] : null;
-        // $answerD = isset($answersArray[3]) ? $answersArray[3] : null;
-        // $answerE = isset($answersArray[3]) ? $answersArray[4] : null;
-        // $answerF = isset($answersArray[3]) ? $answersArray[5] : null;
+  
         $answerA = $answersArray[0] ?? null;
         $answerB = $answersArray[1] ?? null;
         $answerC = $answersArray[2] ?? null;
@@ -123,7 +87,7 @@ class QuestController extends Controller
         $answerF = $answersArray[5] ?? null;
         // return $records;
         $records->setAttribute('num_of_answer', $numq);
-        $records->setAttribute('answerA', trim($answerA)); // trim : xóa khoảng trắng 
+        $records->setAttribute('answerA', trim($answerA)); // trim: xoa khoang trang
         $records->setAttribute('answerB', trim($answerB));
         $records->setAttribute('answerC', trim($answerC));
         $records->setAttribute('answerD', trim($answerD));
